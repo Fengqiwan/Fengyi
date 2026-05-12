@@ -1,0 +1,589 @@
+/* =============================================
+   全局重置与基础
+   ============================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* 锚点跳转时平滑滚动 */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Microsoft YaHei", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color: #333;
+    background: #f0f2f5;
+    /* 为 fixed header 留出空间，防止内容被遮挡 */
+    padding-top: 60px;
+    min-height: 100vh;
+}
+
+/*
+    scroll-margin-top 解决锚点跳转被 fixed header 遮挡的问题
+    所有带 id 的元素在滚动到视口顶部时，自动留出 80px 的上边距
+    80px = header高度60px + 20px缓冲
+*/
+[id] {
+    scroll-margin-top: 80px;
+}
+
+
+/* =============================================
+   HEADER — 固定顶部栏
+   ============================================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 60px;
+    background: #1a1a2e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* 左侧logo和右侧语言按钮推到两端 */
+    padding: 0 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo {
+    width: 36px;
+    height: 36px;
+    background: #e94560;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    flex-shrink: 0;  /* 不被压缩 */
+}
+
+header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* --- 语言切换按钮 --- */
+.lang-wrapper {
+    /*
+        position:relative 使内部的 .lang-popup 绝对定位时
+        以此容器为参考锚点（而非整个页面）
+    */
+    position: relative;
+}
+
+.lang-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* --- 语言选择浮窗 --- */
+.lang-popup {
+    /*
+        默认隐藏，通过 JS 添加 .show 类来显示
+        绝对定位在按钮正下方，right:0 保证不超出屏幕右侧
+    */
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);  /* 按钮底部 + 10px间距 */
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    min-width: 150px;
+    z-index: 1001;
+}
+
+.lang-popup.show {
+    display: block;
+    animation: fadeDown 0.2s ease;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 18px;
+    border: none;
+    background: none;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: left;
+}
+
+.lang-option:hover {
+    background: #f5f5f5;
+}
+
+/* ✓ 勾选标记：默认透明（不可见），.active 时显示红色 */
+.lang-check {
+    color: transparent;
+    font-size: 14px;
+    width: 18px;
+    text-align: center;
+    transition: color 0.15s;
+}
+
+.lang-option.active {
+    color: #e94560;
+    font-weight: 600;
+}
+
+.lang-option.active .lang-check {
+    color: #e94560;
+}
+
+/* 桌面端 header 增大内边距 */
+@media (min-width: 768px) {
+    header { padding: 0 40px; }
+    header h1 { font-size: 22px; }
+}
+
+
+/* =============================================
+   MAIN — 主内容区
+   ============================================= */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+
+@media (min-width: 768px) {
+    main { padding: 30px 40px; }
+}
+
+
+/* =============================================
+   ARTICLE — 文章卡片
+   ============================================= */
+article {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+article h2 {
+    font-size: 20px;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+}
+
+article > .meta {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 14px;
+}
+
+article > p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+/* --- SECTION — 文章内部章节 --- */
+article section {
+    margin-top: 18px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+
+article section h3 {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+article section p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+article section ul,
+article section ol {
+    padding-left: 22px;
+    margin-bottom: 8px;
+}
+
+article section li {
+    line-height: 1.9;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+/* 桌面端文章增大 */
+@media (min-width: 768px) {
+    article { padding: 30px; }
+    article h2 { font-size: 24px; }
+    article section { padding: 20px; }
+    article section h3 { font-size: 18px; }
+}
+
+
+/* =============================================
+   ASIDE — 浮动章节目录面板
+   ============================================= */
+
+/* --- 悬浮触发按钮 --- */
+.toc-toggle {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 901;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.toc-toggle:hover {
+    background: #e94560;
+    transform: scale(1.1);
+}
+
+/* 面板展开时按钮变成关闭样式 */
+.toc-toggle.active {
+    background: #e94560;
+}
+
+/* --- 目录面板主体 --- */
+.toc-panel {
+    position: fixed;
+    /*
+        bottom 定位在触发按钮上方
+        50px(按钮高) + 28px(按钮bottom) + 12px(间距) = 90px
+    */
+    bottom: 90px;
+    right: 28px;
+    z-index: 900;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.14);
+    padding: 18px;
+    width: 240px;
+    max-height: 55vh;       /* 限制最大高度，防止内容太多撑满屏幕 */
+    overflow-y: auto;       /* 超出时出现滚动条 */
+
+    /* ✅ 默认隐藏 */
+    display: none;
+}
+
+.toc-panel.show {
+    display: block;
+    animation: fadeSlideUp 0.25s ease;
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.toc-panel h3 {
+    font-size: 15px;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* 一级目录（无默认圆点） */
+.toc-panel > ul {
+    list-style: none;
+}
+
+/* 章级条目 */
+.toc-chapter {
+    margin-bottom: 6px;
+}
+
+.toc-chapter > a {
+    display: block;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.15s;
+}
+
+.toc-chapter > a:hover {
+    background: #fef0f0;
+    color: #e94560;
+}
+
+/* 节级目录 */
+.toc-chapter > ul {
+    list-style: none;
+    padding-left: 14px;
+}
+
+.toc-chapter > ul li a {
+    display: block;
+    padding: 5px 10px;
+    font-size: 13px;
+    color: #777;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.toc-chapter > ul li a:hover {
+    color: #e94560;
+    background: #fef0f0;
+}
+
+/* 桌面端面板稍大 */
+@media (min-width: 768px) {
+    .toc-panel {
+        width: 270px;
+        padding: 22px;
+    }
+}
+
+
+/* =============================================
+   FOOTER — 极窄屏完整显示方案
+   ============================================= */
+footer {
+    background: #1a1a2e;
+    padding: 24px 16px;
+    color: #ccc;
+}
+
+@media (min-width: 768px) {
+    footer { padding: 40px 60px; }
+}
+
+/* --- 第一行：Logo + 名称 --- */
+.footer-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.footer-logo {
+    width: 70px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.footer-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #eee;
+}
+
+@media (min-width: 768px) {
+    .footer-logo { width: 100px; height: 70px; }
+    .footer-name { font-size: 26px; }
+}
+
+/* --- 第二行：简介 --- */
+.footer-intro {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 14px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.footer-intro p {
+    line-height: 1.7;
+    color: #aaa;
+    font-size: 13px;
+    /*
+        ✅ 极窄屏保护：允许在任意位置断词
+        overflow-wrap: 只在必要时断开长单词（如邮箱地址）
+        word-break: 允许在中日韩文字内断行
+    */
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (min-width: 768px) {
+    .footer-intro { padding: 20px; }
+    .footer-intro p { font-size: 15px; }
+}
+
+/* --- 第三行：联系方式 + 二维码 --- */
+.footer-bottom {
+    display: flex;
+    gap: 20px;
+    /*
+        ✅ 关键修复：默认允许换行
+        极窄屏时联系方式占满一行，二维码掉到下一行
+        保证文字永远不被截断
+    */
+    flex-wrap: wrap;
+}
+
+/*
+    ≥600px 时禁止换行，强制同一行
+    600px 是联系方式+二维码能舒适共存的最小宽度
+*/
+@media (min-width: 600px) {
+    .footer-bottom {
+        flex-wrap: nowrap;
+        align-items: stretch;  /* 左右等高 */
+    }
+}
+
+/* 左侧：联系方式 */
+.footer-contact {
+    /*
+        flex: 1 1 100%
+        · 1（grow）: 可以伸展
+        · 1（shrink）: 可以收缩
+        · 100%（basis）: 默认占满整行（窄屏时）
+    */
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;  /* 允许flex子项收缩到0宽度 */
+}
+
+@media (min-width: 600px) {
+    .footer-contact {
+        flex: 1 1 0;  /* 在同行模式下，自动分配剩余空间 */
+    }
+}
+
+.footer-contact p {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 5px;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.5;
+    /*
+        ✅ 核心：不设 white-space:nowrap，不设 text-overflow:ellipsis
+        文字自然换行 → 极窄屏也能显示完整内容
+    */
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (min-width: 768px) {
+    .footer-contact p { font-size: 15px; }
+}
+
+/* 右侧：二维码 */
+.footer-qrcode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+    /*
+        ✅ 窄屏（wrap生效时）：水平排列 [图片] [文字]
+        充分利用整行空间，不浪费纵向空间
+    */
+    flex-direction: row;
+}
+
+/*
+    ≥600px 改为纵向排列（图片在上、文字在下）
+    固定宽度，不被压缩
+*/
+@media (min-width: 600px) {
+    .footer-qrcode {
+        flex-direction: column;
+        justify-content: space-between;
+        width: 120px;
+        padding: 5px 0;
+        flex-shrink: 0;
+    }
+}
+
+.qrcode-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+@media (min-width: 600px) {
+    .qrcode-img { width: 90px; height: 90px; }
+}
+@media (min-width: 768px) {
+    .qrcode-img { width: 110px; height: 110px; }
+    .footer-qrcode { width: 140px; }
+}
+
+.qrcode-tip {
+    font-size: 13px;
+    color: #888;
+}
+
+/* --- 版权信息 --- */
+.footer-copyright {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+    .footer-copyright { font-size: 13px; }
+}
