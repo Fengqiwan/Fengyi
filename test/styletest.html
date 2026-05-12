@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语义化模块测试页</title>
+    <style>
+        /* ========== 全局重置 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+            background: #fafafa;
+            /* 为fixed header留出空间 */
+            padding-top: 60px;
+        }
+
+        /* ========================================
+           模块标注 —— 每个语义标签带醒目边框+标签名
+           ======================================== */
+        .tag-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: bold;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+
+        /* ========== ① HEADER 固定顶部 ========== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            /* 测试标注 */
+            outline: 3px solid #e94560;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            background: #e94560;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .header-actions button {
+            padding: 6px 16px;
+            border: 2px solid #e94560;
+            background: transparent;
+            color: #e94560;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .header-actions button:hover {
+            background: #e94560;
+            color: #fff;
+        }
+        .header-actions button.primary {
+            background: #e94560;
+            color: #fff;
+        }
+        .header-actions button.primary:hover {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 0 40px;
+            }
+        }
+
+        /* ========== ② NAV 导航栏 ========== */
+        nav {
+            background: #16213e;
+            padding: 0 20px;
+            /* 测试标注 */
+            outline: 3px solid #0f3460;
+            position: sticky;
+            top: 60px;
+            z-index: 999;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+        nav ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #fff;
+            border-bottom-color: #e94560;
+            background: rgba(255,255,255,0.05);
+        }
+        @media (min-width: 768px) {
+            nav {
+                padding: 0 40px;
+            }
+            nav ul li a {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+        }
+
+        /* ========== ③ MAIN + ASIDE 主体布局 ========== */
+        .page-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .page-body {
+                flex-direction: row;
+                padding: 30px 40px;
+                gap: 30px;
+            }
+        }
+
+        /* ===== MAIN 主内容区 ===== */
+        main {
+            flex: 1;
+            min-width: 0;
+            /* 测试标注 */
+            outline: 3px dashed #2ecc71;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+        }
+        main > .tag-label { background: #2ecc71; }
+
+        /* ===== ARTICLE 文章模块 ===== */
+        article {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            /* 测试标注 */
+            outline: 2px dashed #3498db;
+        }
+        article > .tag-label { background: #3498db; }
+        article h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            color: #1a1a2e;
+        }
+        article .meta {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        article p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        article h3 {
+            font-size: 17px;
+            margin: 15px 0 8px;
+            color: #2c3e50;
+        }
+        article ul, article ol {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        article li {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* SECTION 块 */
+        article section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 4px;
+            outline: 2px dotted #9b59b6;
+        }
+        article section > .tag-label { background: #9b59b6; }
+
+        /* ===== ASIDE 侧边栏 ===== */
+        aside.sidebar {
+            width: 100%;
+            /* 测试标注 */
+            outline: 3px dashed #e67e22;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+        }
+        aside.sidebar > .tag-label { background: #e67e22; }
+        @media (min-width: 768px) {
+            aside.sidebar {
+                width: 280px;
+                flex-shrink: 0;
+                position: sticky;
+                top: 110px;
+                align-self: flex-start;
+                max-height: calc(100vh - 130px);
+                overflow-y: auto;
+            }
+        }
+
+        .sidebar-block {
+            margin-bottom: 24px;
+        }
+        .sidebar-block h3 {
+            font-size: 16px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #eee;
+            color: #1a1a2e;
+        }
+        .sidebar-block ul {
+            list-style: none;
+        }
+        .sidebar-block ul li {
+            margin-bottom: 6px;
+        }
+        .sidebar-block ul li a {
+            display: block;
+            padding: 8px 12px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.15s;
+        }
+        .sidebar-block ul li a:hover {
+            background: #f0f0f0;
+            color: #e94560;
+        }
+        .sidebar-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .sidebar-tag:hover {
+            background: #e94560;
+            color: #fff;
+        }
+
+        /* ========== ④ FOOTER 页尾（优化版） ========== */
+        footer {
+            background-color: #1a1a2e;
+            padding: 20px;
+            color: #ccc;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 测试标注 */
+            outline: 3px solid #e94560;
+        }
+        footer > .tag-label { background: #e94560; }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 40px 80px;
+            }
+        }
+
+        .footer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        .footer-logo {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            background: #2a2a4a;
+            border-radius: 6px;
+        }
+        .footer-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #eee;
+        }
+        @media (min-width: 768px) {
+            .footer-name { font-size: 28px; }
+            .footer-logo { width: 120px; height: 80px; }
+        }
+
+        .footer-intro {
+            background-color: rgba(255,255,255,0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .footer-intro p {
+            line-height: 1.6;
+            color: #aaa;
+            font-size: 14px;
+        }
+        @media (min-width: 768px) {
+            .footer-intro { padding: 20px; }
+            .footer-intro p { font-size: 16px; }
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        .footer-contact {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-contact p {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            font-size: 14px;
+            color: #bbb;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @media (min-width: 768px) {
+            .footer-contact p { font-size: 16px; }
+        }
+
+        .footer-qrcode {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 5px 0;
+            flex-shrink: 0;
+            width: 120px;
+        }
+        .qrcode-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            background: rgba(255,255,255,0.08);
+            border-radius: 6px;
+        }
+        .qrcode-tip {
+            font-size: 13px;
+            color: #888;
+        }
+        @media (min-width: 768px) {
+            .footer-qrcode { width: 150px; }
+            .qrcode-img { width: 130px; height: 130px; }
+            .qrcode-tip { font-size: 16px; }
+        }
+
+        .footer-copyright {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* ========== 标注图例面板 ========== */
+        .legend-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            z-index: 2000;
+            font-size: 13px;
+            max-width: 220px;
+            transition: transform 0.3s;
+        }
+        .legend-panel h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .legend-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2001;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: #e94560;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-left">
+            <div class="header-logo">T</div>
+            <h1>测试站点</h1>
+        </div>
+        <div class="header-actions">
+            <button type="button">登录</button>
+            <button type="button" class="primary">注册</button>
+        </div>
+    </header>
+
+    <!-- ==================== NAV ==================== -->
+    <nav>
+        <ul>
+            <li><a href="#" class="active">首页</a></li>
+            <li><a href="#">技术文章</a></li>
+            <li><a href="#">产品中心</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">联系方式</a></li>
+            <li><a href="#">帮助文档</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== MAIN + ASIDE ==================== -->
+    <div class="page-body">
+
+        <!-- ===== MAIN ===== -->
+        <main>
+            <span class="tag-label" style="background:#2ecc71">&lt;main&gt;</span>
+
+            <!-- 文章1 -->
+            <article>
+                <span class="tag-label" style="background:#3498db">&lt;article&gt;</span>
+                <h2>语义化标签使用指南</h2>
+                <p class="meta">2026-05-12 · 前端开发 · 阅读约5分钟</p>
+
+                <p>HTML5 引入了大量语义化标签，它们让文档结构更清晰、可访问性更好、SEO 更友好。下面是各标签的核心作用：</p>
+
+                <section>
+                    <span class="tag-label" style="background:#9b59b6">&lt;section&gt;</span>
+                    <h3>块级语义标签一览</h3>
+                    <ul>
+                        <li><strong>header</strong> — 页面或区块的头部</li>
+                        <li><strong>nav</strong> — 导航链接集合</li>
+                        <li><strong>main</strong> — 页面主体内容（唯一）</li>
+                        <li><strong>article</strong> — 独立的内容单元</li>
+                        <li><strong>section</strong> — 主题性分组</li>
+                        <li><strong>aside</strong> — 侧边补充内容</li>
+                        <li><strong>footer</strong> — 页面或区块的底部</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <span class="tag-label" style="background:#9b59b6">&lt;section&gt;</span>
+                    <h3>为什么不用 div 替代？</h3>
+                    <ol>
+                        <li>屏幕阅读器能识别语义标签，提升无障碍体验</li>
+                        <li>搜索引擎能更准确理解内容结构</li>
+                        <li>代码可读性和可维护性大幅提升</li>
+                    </ol>
+                </section>
+            </article>
+
+            <!-- 文章2 -->
+            <article>
+                <span class="tag-label" style="background:#3498db">&lt;article&gt;</span>
+                <h2>Flexbox 布局实战技巧</h2>
+                <p class="meta">2026-05-10 · CSS布局 · 阅读约3分钟</p>
+
+                <p>Flexbox 是现代 CSS 布局的核心工具。掌握以下属性组合可以解决 90% 的布局需求：</p>
+
+                <section>
+                    <span class="tag-label" style="background:#9b59b6">&lt;section&gt;</span>
+                    <h3>常用属性速查</h3>
+                    <ul>
+                        <li><strong>flex: 1</strong> — 自动填充剩余空间</li>
+                        <li><strong>align-items: stretch</strong> — 子项等高</li>
+                        <li><strong>min-width: 0</strong> — 允许内容收缩</li>
+                        <li><strong>flex-shrink: 0</strong> — 禁止被压缩</li>
+                        <li><strong>gap</strong> — 替代margin实现间距</li>
+                    </ul>
+                </section>
+
+                <p>合理组合这些属性，配合媒体查询实现响应式，可以覆盖绝大多数业务场景。</p>
+            </article>
+        </main>
+
+        <!-- ===== ASIDE 侧边栏 ===== -->
+        <aside class="sidebar">
+            <span class="tag-label" style="background:#e67e22">&lt;aside&gt;</span>
+
+            <div class="sidebar-block">
+                <h3>📂 文章分类</h3>
+                <ul>
+                    <li><a href="#">HTML 基础（12）</a></li>
+                    <li><a href="#">CSS 布局（8）</a></li>
+                    <li><a href="#">JavaScript（15）</a></li>
+                    <li><a href="#">响应式设计（6）</a></li>
+                    <li><a href="#">无障碍开发（4）</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>🏷️ 热门标签</h3>
+                <div>
+                    <a href="#" class="sidebar-tag">语义化</a>
+                    <a href="#" class="sidebar-tag">Flexbox</a>
+                    <a href="#" class="sidebar-tag">Grid</a>
+                    <a href="#" class="sidebar-tag">响应式</a>
+                    <a href="#" class="sidebar-tag">SEO</a>
+                    <a href="#" class="sidebar-tag">无障碍</a>
+                    <a href="#" class="sidebar-tag">HTML5</a>
+                    <a href="#" class="sidebar-tag">CSS3</a>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>📌 推荐阅读</h3>
+                <ul>
+                    <li><a href="#">MDN 语义化标签文档</a></li>
+                    <li><a href="#">CSS Tricks - Flexbox 指南</a></li>
+                    <li><a href="#">W3C 无障碍规范</a></li>
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <span class="tag-label" style="background:#e94560">&lt;footer&gt;</span>
+
+        <section class="footer-header">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' fill='%232a2a4a'%3E%3Crect width='120' height='80' rx='6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%23888' font-size='14'%3ELOGO%3C/text%3E%3C/svg%3E"
+                 alt="公司Logo" class="footer-logo">
+            <h2 class="footer-name">测试站点</h2>
+        </section>
+
+        <section class="footer-intro">
+            <p>这是一个用于测试 HTML5 语义化标签（header、nav、main、article、section、aside、footer）布局效果的演示页面。所有模块均使用语义化标签构建，配合 Flexbox 实现响应式布局。</p>
+        </section>
+
+        <section class="footer-bottom">
+            <section class="footer-contact">
+                <p>📍 地址：广东省深圳市南山区科技园XX大厦</p>
+                <p>📞 电话：400-123-4567</p>
+                <p>📧 邮箱：contact@testsite.com</p>
+            </section>
+            <aside class="footer-qrcode">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Crect width='130' height='130' rx='6' fill='%232a2a4a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%23666' font-size='13'%3E二维码%3C/text%3E%3C/svg%3E"
+                     alt="公众号二维码" class="qrcode-img">
+                <p class="qrcode-tip">关注我们！</p>
+            </aside>
+        </section>
+
+        <p class="footer-copyright">© 2026 测试站点 · 仅供语义化标签布局测试使用</p>
+    </footer>
+
+    <!-- ==================== 图例面板 ==================== -->
+    <button class="legend-toggle" id="legendToggle" type="button" aria-label="显示图例">?</button>
+    <div class="legend-panel" id="legendPanel">
+        <h3>🎨 语义标签图例</h3>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#e94560"></span>
+            <span>&lt;header&gt; / &lt;footer&gt;</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#0f3460"></span>
+            <span>&lt;nav&gt;</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#2ecc71"></span>
+            <span>&lt;main&gt;</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#3498db"></span>
+            <span>&lt;article&gt;</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#9b59b6"></span>
+            <span>&lt;section&gt;</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background:#e67e22"></span>
+            <span>&lt;aside&gt;</span>
+        </div>
+    </div>
+
+    <script>
+        // 小屏时图例面板可收起
+        const panel = document.getElementById('legendPanel');
+        const toggle = document.getElementById('legendToggle');
+        let panelVisible = true;
+
+        function checkScreen() {
+            if (window.innerWidth < 768) {
+                panel.style.display = panelVisible ? 'block' : 'none';
+                toggle.style.display = 'block';
+            } else {
+                panel.style.display = 'block';
+                toggle.style.display = 'none';
+            }
+        }
+
+        toggle.addEventListener('click', function() {
+            panelVisible = !panelVisible;
+            panel.style.display = panelVisible ? 'block' : 'none';
+            toggle.textContent = panelVisible ? '✕' : '?';
+        });
+
+        window.addEventListener('resize', checkScreen);
+        checkScreen();
+    </script>
+
+</body>
+</html>

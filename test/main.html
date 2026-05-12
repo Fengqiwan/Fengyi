@@ -8,31 +8,20 @@
 </head>
 <body>
 
-    <!--
-        ============ HEADER ============
-        · fixed 固定顶部
-        · 左侧：Logo + 站点名称
-        · 右侧：语言切换按钮 + 弹出浮窗
-        · 不含 nav / 登录 / 注册
-    -->
+    <!-- ==================== HEADER ==================== -->
     <header>
         <div class="header-left">
             <div class="header-logo" aria-hidden="true">T</div>
-            <h1 data-i18n="site_name">测试站点</h1>
+            <h1 data-i18n="header.siteName">测试站点</h1>
         </div>
-
-        <!--
-            语言切换模块
-            · .lang-wrapper 设 position:relative，作为浮窗定位锚点
-            · #langBtn 点击切换浮窗显示/隐藏
-            · #langPopup 绝对定位在按钮正下方
-            · 每个 .lang-option 携带 data-lang 标识语言代码
-            · .lang-check 只在 .active 时显示 ✓
-        -->
         <div class="lang-wrapper">
-            <button type="button" class="lang-btn" id="langBtn" aria-label="切换语言">
-                🌐
-            </button>
+            <button type="button" class="lang-btn" id="langBtn" aria-label="切换语言">🌐</button>
+            <!--
+                语言浮窗：
+                · position:absolute 锚定在 .lang-wrapper 内
+                · 每个按钮携带 data-lang="xx" 语言代码
+                · JS 根据代码 fetch 对应 JSON 文件
+            -->
             <div class="lang-popup" id="langPopup">
                 <button type="button" class="lang-option active" data-lang="zh">
                     <span class="lang-check">✓</span> 中文
@@ -47,163 +36,187 @@
         </div>
     </header>
 
-    <!--
-        ============ MAIN ============
-        · 页面唯一主内容区
-        · 3篇 article，每篇内含2个 section
-        · 所有 article/section 都带 id，供目录面板锚点跳转
-        · 所有可翻译文本带 data-i18n（纯文本）或 data-i18n-html（含HTML标签）
-    -->
+    <!-- ==================== MAIN ==================== -->
     <main>
+        <!--
+            每个 article/section 都带 id → 供目录面板锚点跳转
+            data-i18n="a1.title" → 对应 JSON 中 { a1: { title: "..." } }
+            data-i18n-html="a1.s1.li1" → innerHTML 替换（保留 <strong> 等标签）
+        -->
 
-        <!-- 文章1：语义化标签 -->
+        <!-- 文章1 -->
         <article id="chap1">
-            <h2 data-i18n="a1_title">语义化标签使用指南</h2>
-            <p class="meta" data-i18n="a1_meta">2026-05-12 · 前端开发 · 阅读约5分钟</p>
-            <p data-i18n="a1_intro">HTML5 引入了大量语义化标签，它们让文档结构更清晰、可访问性更好、SEO 更友好。下面是各标签的核心作用：</p>
+            <h2 data-i18n="a1.title">语义化标签使用指南</h2>
+            <p class="meta" data-i18n="a1.meta">2026-05-12 · 前端开发 · 阅读约5分钟</p>
+            <p data-i18n="a1.intro">HTML5 引入了大量语义化标签，它们让文档结构更清晰、可访问性更好、SEO 更友好。下面是各标签的核心作用：</p>
 
             <section id="chap1-1">
-                <h3 data-i18n="a1_s1_title">块级语义标签一览</h3>
+                <h3 data-i18n="a1.s1.title">块级语义标签一览</h3>
                 <ul>
-                    <li data-i18n-html="a1_s1_li1"><strong>header</strong> — 页面或区块的头部</li>
-                    <li data-i18n-html="a1_s1_li2"><strong>nav</strong> — 导航链接集合</li>
-                    <li data-i18n-html="a1_s1_li3"><strong>main</strong> — 页面主体内容（唯一）</li>
-                    <li data-i18n-html="a1_s1_li4"><strong>article</strong> — 独立的内容单元</li>
-                    <li data-i18n-html="a1_s1_li5"><strong>section</strong> — 主题性分组</li>
-                    <li data-i18n-html="a1_s1_li6"><strong>aside</strong> — 侧边补充内容</li>
-                    <li data-i18n-html="a1_s1_li7"><strong>footer</strong> — 页面或区块的底部</li>
+                    <li data-i18n-html="a1.s1.li1"><strong>header</strong> — 页面或区块的头部</li>
+                    <li data-i18n-html="a1.s1.li2"><strong>nav</strong> — 导航链接集合</li>
+                    <li data-i18n-html="a1.s1.li3"><strong>main</strong> — 页面主体内容（唯一）</li>
+                    <li data-i18n-html="a1.s1.li4"><strong>article</strong> — 独立的内容单元</li>
+                    <li data-i18n-html="a1.s1.li5"><strong>section</strong> — 主题性分组</li>
+                    <li data-i18n-html="a1.s1.li6"><strong>aside</strong> — 侧边补充内容</li>
+                    <li data-i18n-html="a1.s1.li7"><strong>footer</strong> — 页面或区块的底部</li>
                 </ul>
             </section>
 
             <section id="chap1-2">
-                <h3 data-i18n="a1_s2_title">为什么不用 div 替代？</h3>
+                <h3 data-i18n="a1.s2.title">为什么不用 div 替代？</h3>
                 <ol>
-                    <li data-i18n="a1_s2_li1">屏幕阅读器能识别语义标签，提升无障碍体验</li>
-                    <li data-i18n="a1_s2_li2">搜索引擎能更准确理解内容结构</li>
-                    <li data-i18n="a1_s2_li3">代码可读性和可维护性大幅提升</li>
+                    <li data-i18n="a1.s2.li1">屏幕阅读器能识别语义标签，提升无障碍体验</li>
+                    <li data-i18n="a1.s2.li2">搜索引擎能更准确理解内容结构</li>
+                    <li data-i18n="a1.s2.li3">代码可读性和可维护性大幅提升</li>
                 </ol>
             </section>
         </article>
 
-        <!-- 文章2：Flexbox布局 -->
+        <!-- 文章2 -->
         <article id="chap2">
-            <h2 data-i18n="a2_title">Flexbox 布局实战技巧</h2>
-            <p class="meta" data-i18n="a2_meta">2026-05-10 · CSS布局 · 阅读约3分钟</p>
-            <p data-i18n="a2_intro">Flexbox 是现代 CSS 布局的核心工具，掌握以下属性组合可以解决 90% 的布局需求。</p>
+            <h2 data-i18n="a2.title">Flexbox 布局实战技巧</h2>
+            <p class="meta" data-i18n="a2.meta">2026-05-10 · CSS布局 · 阅读约3分钟</p>
+            <p data-i18n="a2.intro">Flexbox 是现代 CSS 布局的核心工具，掌握以下属性组合可以解决 90% 的布局需求。</p>
 
             <section id="chap2-1">
-                <h3 data-i18n="a2_s1_title">常用属性速查</h3>
+                <h3 data-i18n="a2.s1.title">常用属性速查</h3>
                 <ul>
-                    <li data-i18n-html="a2_s1_li1"><strong>flex: 1</strong> — 自动填充剩余空间</li>
-                    <li data-i18n-html="a2_s1_li2"><strong>align-items: stretch</strong> — 子项等高</li>
-                    <li data-i18n-html="a2_s1_li3"><strong>min-width: 0</strong> — 允许内容收缩</li>
-                    <li data-i18n-html="a2_s1_li4"><strong>flex-shrink: 0</strong> — 禁止被压缩</li>
-                    <li data-i18n-html="a2_s1_li5"><strong>gap</strong> — 替代margin实现间距</li>
+                    <li data-i18n-html="a2.s1.li1"><strong>flex: 1</strong> — 自动填充剩余空间</li>
+                    <li data-i18n-html="a2.s1.li2"><strong>align-items: stretch</strong> — 子项等高</li>
+                    <li data-i18n-html="a2.s1.li3"><strong>min-width: 0</strong> — 允许内容收缩</li>
+                    <li data-i18n-html="a2.s1.li4"><strong>flex-shrink: 0</strong> — 禁止被压缩</li>
+                    <li data-i18n-html="a2.s1.li5"><strong>gap</strong> — 替代margin实现间距</li>
                 </ul>
             </section>
 
             <section id="chap2-2">
-                <h3 data-i18n="a2_s2_title">实战案例分析</h3>
-                <p data-i18n="a2_s2_p1">在页尾布局中，我们使用 flex + stretch 实现左右等高，用 flex-shrink:0 保护二维码不被压缩，用 min-width:0 + overflow-wrap 防止极窄屏溢出。这些技巧的组合使用是 Flexbox 的精髓所在。</p>
-                <p data-i18n="a2_s2_p2">合理组合这些属性，配合媒体查询实现响应式，可以覆盖绝大多数业务场景。关键是理解每个属性的作用原理，而非死记硬背。</p>
+                <h3 data-i18n="a2.s2.title">实战案例分析</h3>
+                <p data-i18n="a2.s2.p1">在页尾布局中，我们使用 flex + stretch 实现左右等高，用 flex-shrink:0 保护二维码不被压缩，用 min-width:0 + overflow-wrap 防止极窄屏溢出。</p>
+                <p data-i18n="a2.s2.p2">合理组合这些属性，配合媒体查询实现响应式，可以覆盖绝大多数业务场景。</p>
             </section>
         </article>
 
-        <!-- 文章3：响应式设计 -->
+        <!-- 文章3 -->
         <article id="chap3">
-            <h2 data-i18n="a3_title">响应式设计核心原则</h2>
-            <p class="meta" data-i18n="a3_meta">2026-05-08 · 响应式 · 阅读约4分钟</p>
-            <p data-i18n="a3_intro">响应式设计的目标是让网页在任何设备上都能提供良好的用户体验，从320px的小屏手机到2560px的超宽显示器。</p>
+            <h2 data-i18n="a3.title">响应式设计核心原则</h2>
+            <p class="meta" data-i18n="a3.meta">2026-05-08 · 响应式 · 阅读约4分钟</p>
+            <p data-i18n="a3.intro">响应式设计的目标是让网页在任何设备上都能提供良好的用户体验，从320px的小屏手机到2560px的超宽显示器。</p>
 
             <section id="chap3-1">
-                <h3 data-i18n="a3_s1_title">移动优先策略</h3>
-                <p data-i18n="a3_s1_p1">移动优先（Mobile First）意味着先编写移动端样式作为基础，然后通过 min-width 媒体查询逐步增强桌面端体验。这种方式确保了核心内容在任何设备上都可访问。</p>
+                <h3 data-i18n="a3.s1.title">移动优先策略</h3>
+                <p data-i18n="a3.s1.p1">移动优先意味着先编写移动端样式作为基础，然后通过 min-width 媒体查询逐步增强桌面端体验。</p>
                 <ul>
-                    <li data-i18n="a3_s1_li1">基础样式 → 适用于所有屏幕</li>
-                    <li data-i18n="a3_s1_li2">@media (min-width: 768px) → 平板及以上增强</li>
-                    <li data-i18n="a3_s1_li3">@media (min-width: 1024px) → 桌面端完整体验</li>
+                    <li data-i18n="a3.s1.li1">基础样式 → 适用于所有屏幕</li>
+                    <li data-i18n="a3.s1.li2">@media (min-width: 768px) → 平板及以上增强</li>
+                    <li data-i18n="a3.s1.li3">@media (min-width: 1024px) → 桌面端完整体验</li>
                 </ul>
             </section>
 
             <section id="chap3-2">
-                <h3 data-i18n="a3_s2_title">断点选择与内容适配</h3>
-                <p data-i18n="a3_s2_p1">断点不应该根据特定设备选择，而应该根据内容何时"断裂"来决定。当内容在某个宽度下开始显示不佳时，就是设置断点的时机。</p>
-                <p data-i18n="a3_s2_p2">常用断点参考：480px（大屏手机）、768px（平板）、1024px（小型桌面）、1200px（标准桌面）。但这些只是参考，实际项目应根据设计稿和内容灵活调整。</p>
+                <h3 data-i18n="a3.s2.title">断点选择与内容适配</h3>
+                <p data-i18n="a3.s2.p1">断点不应根据特定设备选择，而应根据内容何时"断裂"来决定。</p>
+                <p data-i18n="a3.s2.p2">常用断点：480px（大屏手机）、768px（平板）、1024px（小型桌面）、1200px（标准桌面）。实际项目应根据设计灵活调整。</p>
             </section>
         </article>
     </main>
 
     <!--
-        ============ ASIDE：浮动目录面板 ============
-        · 语义上是 aside（页面辅助内容）
-        · 视觉上是固定在右下角的可收起面板
-        · #tocToggle 悬浮按钮始终可见
-        · #tocPanel 默认隐藏，点击按钮展开
-        · 每个 <a> 的 href 指向对应的 article/section 的 id
-        · 点击链接后面板自动关闭 + 页面平滑滚动到目标
+        ==================== 推荐栏 ====================
+        · 位于 main 之后、footer 之前
+        · 语义：section（页面级主题分组）
+        · 列表：ul > li，每个 li 内是一个 <a> 包裹的卡片
+        · 布局：CSS Grid 响应式 1列→2列→4列
     -->
-    <button type="button" class="toc-toggle" id="tocToggle" aria-label="章节目录">
-        📑
-    </button>
+    <section class="recommend">
+        <h2 data-i18n="recommend.title">推荐阅读</h2>
+        <ul class="recommend-grid">
+            <li>
+                <a href="#" class="recommend-card">
+                    <span class="recommend-tag tag-blue" data-i18n="recommend.r1.tag">CSS 布局</span>
+                    <h3 data-i18n="recommend.r1.title">CSS Grid 完全指南</h3>
+                    <p data-i18n="recommend.r1.desc">从基础网格概念到复杂布局实战，全面掌握 CSS Grid 的二维布局能力。</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="recommend-card">
+                    <span class="recommend-tag tag-green" data-i18n="recommend.r2.tag">无障碍</span>
+                    <h3 data-i18n="recommend.r2.title">Web 无障碍设计入门</h3>
+                    <p data-i18n="recommend.r2.desc">了解 ARIA 属性、键盘导航、屏幕阅读器适配等核心无障碍技术。</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="recommend-card">
+                    <span class="recommend-tag tag-orange" data-i18n="recommend.r3.tag">JavaScript</span>
+                    <h3 data-i18n="recommend.r3.title">现代 JavaScript 模块化</h3>
+                    <p data-i18n="recommend.r3.desc">ESM、CommonJS、动态导入——理清模块化的前世今生。</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="recommend-card">
+                    <span class="recommend-tag tag-red" data-i18n="recommend.r4.tag">性能优化</span>
+                    <h3 data-i18n="recommend.r4.title">前端性能优化实践</h3>
+                    <p data-i18n="recommend.r4.desc">懒加载、代码分割、关键渲染路径优化的最佳实践总结。</p>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ==================== ASIDE 目录面板 ==================== -->
+    <button type="button" class="toc-toggle" id="tocToggle" aria-label="章节目录">📑</button>
     <aside class="toc-panel" id="tocPanel">
-        <h3 data-i18n="toc_title">📑 章节目录</h3>
+        <h3 data-i18n="toc.title">📑 章节目录</h3>
         <ul>
             <li class="toc-chapter">
-                <a href="#chap1" data-i18n="toc_a1">一、语义化标签使用指南</a>
+                <a href="#chap1" data-i18n="toc.a1">一、语义化标签使用指南</a>
                 <ul>
-                    <li><a href="#chap1-1" data-i18n="toc_a1_s1">1.1 块级语义标签一览</a></li>
-                    <li><a href="#chap1-2" data-i18n="toc_a1_s2">1.2 为什么不用div替代？</a></li>
+                    <li><a href="#chap1-1" data-i18n="toc.a1s1">1.1 块级语义标签一览</a></li>
+                    <li><a href="#chap1-2" data-i18n="toc.a1s2">1.2 为什么不用div替代？</a></li>
                 </ul>
             </li>
             <li class="toc-chapter">
-                <a href="#chap2" data-i18n="toc_a2">二、Flexbox布局实战</a>
+                <a href="#chap2" data-i18n="toc.a2">二、Flexbox布局实战</a>
                 <ul>
-                    <li><a href="#chap2-1" data-i18n="toc_a2_s1">2.1 常用属性速查</a></li>
-                    <li><a href="#chap2-2" data-i18n="toc_a2_s2">2.2 实战案例分析</a></li>
+                    <li><a href="#chap2-1" data-i18n="toc.a2s1">2.1 常用属性速查</a></li>
+                    <li><a href="#chap2-2" data-i18n="toc.a2s2">2.2 实战案例分析</a></li>
                 </ul>
             </li>
             <li class="toc-chapter">
-                <a href="#chap3" data-i18n="toc_a3">三、响应式设计原则</a>
+                <a href="#chap3" data-i18n="toc.a3">三、响应式设计原则</a>
                 <ul>
-                    <li><a href="#chap3-1" data-i18n="toc_a3_s1">3.1 移动优先策略</a></li>
-                    <li><a href="#chap3-2" data-i18n="toc_a3_s2">3.2 断点选择与适配</a></li>
+                    <li><a href="#chap3-1" data-i18n="toc.a3s1">3.1 移动优先策略</a></li>
+                    <li><a href="#chap3-2" data-i18n="toc.a3s2">3.2 断点选择与适配</a></li>
                 </ul>
             </li>
         </ul>
     </aside>
 
-    <!--
-        ============ FOOTER ============
-        · 极窄屏关键策略：flex-wrap:wrap + overflow-wrap:break-word
-        · 移动端：联系方式和二维码上下堆叠
-        · ≥600px：左右同行
-        · ≥768px：字号和间距增大
-    -->
+    <!-- ==================== FOOTER ==================== -->
     <footer>
         <section class="footer-header">
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='70'%3E%3Crect width='100' height='70' rx='6' fill='%232a2a4a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%23888' font-size='14'%3ELOGO%3C/text%3E%3C/svg%3E"
-                 alt="公司Logo" class="footer-logo">
-            <h2 class="footer-name" data-i18n="footer_name">测试站点</h2>
+                 alt="Logo" class="footer-logo">
+            <h2 class="footer-name" data-i18n="footer.name">测试站点</h2>
         </section>
 
         <section class="footer-intro">
-            <p data-i18n="footer_intro">这是一个用于测试 HTML5 语义化标签布局效果的演示页面。所有模块均使用语义化标签构建，配合 Flexbox 实现响应式布局。</p>
+            <p data-i18n="footer.intro">这是一个用于测试 HTML5 语义化标签布局效果的演示页面。所有模块均使用语义化标签构建，配合 Flexbox 实现响应式布局。</p>
         </section>
 
         <section class="footer-bottom">
             <section class="footer-contact">
-                <p data-i18n="footer_addr">📍 地址：广东省深圳市南山区科技园XX大厦</p>
-                <p data-i18n="footer_phone">📞 电话：400-123-4567</p>
-                <p data-i18n="footer_email">📧 邮箱：contact@testsite.com</p>
+                <p data-i18n="footer.addr">📍 地址：广东省深圳市南山区科技园XX大厦</p>
+                <p data-i18n="footer.phone">📞 电话：400-123-4567</p>
+                <p data-i18n="footer.email">📧 邮箱：contact@testsite.com</p>
             </section>
             <aside class="footer-qrcode">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Crect width='130' height='130' rx='6' fill='%232a2a4a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%23666' font-size='12'%3EQR Code%3C/text%3E%3C/svg%3E"
-                     alt="公众号二维码" class="qrcode-img">
-                <p class="qrcode-tip" data-i18n="footer_qr_tip">关注我们！</p>
+                     alt="二维码" class="qrcode-img">
+                <p class="qrcode-tip" data-i18n="footer.qrTip">关注我们！</p>
             </aside>
         </section>
 
-        <p class="footer-copyright" data-i18n="footer_copyright">© 2026 测试站点 · 语义化标签布局测试</p>
+        <p class="footer-copyright" data-i18n="footer.copyright">© 2026 测试站点 · 语义化标签布局测试</p>
     </footer>
 
     <script src="./js/script.js"></script>

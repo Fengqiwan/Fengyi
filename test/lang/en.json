@@ -1,0 +1,111 @@
+{
+    "header": {
+        "siteName": "Test Site"
+    },
+
+    "a1": {
+        "title": "Guide to Semantic HTML Tags",
+        "meta": "2026-05-12 · Frontend Dev · ~5 min read",
+        "intro": "HTML5 introduced many semantic tags that make document structure clearer, improve accessibility, and boost SEO. Here are the core roles of each tag:",
+        "s1": {
+            "title": "Block-level Semantic Tags",
+            "li1": "<strong>header</strong> — Head of page or section",
+            "li2": "<strong>nav</strong> — Navigation link collection",
+            "li3": "<strong>main</strong> — Main page content (unique)",
+            "li4": "<strong>article</strong> — Independent content unit",
+            "li5": "<strong>section</strong> — Thematic grouping",
+            "li6": "<strong>aside</strong> — Supplementary side content",
+            "li7": "<strong>footer</strong> — Bottom of page or section"
+        },
+        "s2": {
+            "title": "Why Not Use div Instead?",
+            "li1": "Screen readers recognize semantic tags for better accessibility",
+            "li2": "Search engines understand content structure more accurately",
+            "li3": "Code readability and maintainability are greatly improved"
+        }
+    },
+
+    "a2": {
+        "title": "Flexbox Layout Practical Techniques",
+        "meta": "2026-05-10 · CSS Layout · ~3 min read",
+        "intro": "Flexbox is the core tool for modern CSS layout. Mastering these property combinations solves 90% of layout needs.",
+        "s1": {
+            "title": "Common Properties Quick Reference",
+            "li1": "<strong>flex: 1</strong> — Auto-fill remaining space",
+            "li2": "<strong>align-items: stretch</strong> — Equal height children",
+            "li3": "<strong>min-width: 0</strong> — Allow content shrinking",
+            "li4": "<strong>flex-shrink: 0</strong> — Prevent compression",
+            "li5": "<strong>gap</strong> — Replace margin for spacing"
+        },
+        "s2": {
+            "title": "Practical Case Analysis",
+            "p1": "In the footer layout, we use flex + stretch for equal height, flex-shrink:0 to protect the QR code, and min-width:0 + overflow-wrap to prevent narrow-screen overflow.",
+            "p2": "Combining these properties with media queries covers most business scenarios."
+        }
+    },
+
+    "a3": {
+        "title": "Core Principles of Responsive Design",
+        "meta": "2026-05-08 · Responsive · ~4 min read",
+        "intro": "The goal of responsive design is to provide a good user experience on any device, from 320px phones to 2560px ultrawide monitors.",
+        "s1": {
+            "title": "Mobile-First Strategy",
+            "p1": "Mobile-first means writing mobile styles as the base, then progressively enhancing for desktop via min-width media queries.",
+            "li1": "Base styles → Apply to all screens",
+            "li2": "@media (min-width: 768px) → Tablet and above",
+            "li3": "@media (min-width: 1024px) → Full desktop experience"
+        },
+        "s2": {
+            "title": "Breakpoint Selection & Content Adaptation",
+            "p1": "Breakpoints should be based on when content 'breaks', not specific devices.",
+            "p2": "Common breakpoints: 480px (large phone), 768px (tablet), 1024px (small desktop), 1200px (standard desktop). Adjust based on design."
+        }
+    },
+
+    "toc": {
+        "title": "📑 Chapters",
+        "a1": "1. Semantic HTML Tags Guide",
+        "a1s1": "1.1 Block-level Semantic Tags",
+        "a1s2": "1.2 Why Not Use div?",
+        "a2": "2. Flexbox Layout Techniques",
+        "a2s1": "2.1 Common Properties",
+        "a2s2": "2.2 Case Analysis",
+        "a3": "3. Responsive Design Principles",
+        "a3s1": "3.1 Mobile-First Strategy",
+        "a3s2": "3.2 Breakpoint Selection"
+    },
+
+    "recommend": {
+        "title": "Recommended Reading",
+        "r1": {
+            "tag": "CSS Layout",
+            "title": "Complete Guide to CSS Grid",
+            "desc": "From basic grid concepts to complex layouts — master CSS Grid's 2D layout capabilities."
+        },
+        "r2": {
+            "tag": "Accessibility",
+            "title": "Web Accessibility Basics",
+            "desc": "Learn ARIA attributes, keyboard navigation, and screen reader adaptation techniques."
+        },
+        "r3": {
+            "tag": "JavaScript",
+            "title": "Modern JavaScript Modules",
+            "desc": "ESM, CommonJS, dynamic imports — understand the full story of modularization."
+        },
+        "r4": {
+            "tag": "Performance",
+            "title": "Frontend Performance Optimization",
+            "desc": "Best practices for lazy loading, code splitting, and critical rendering path optimization."
+        }
+    },
+
+    "footer": {
+        "name": "Test Site",
+        "intro": "A demo page for testing HTML5 semantic tag layouts. All modules use semantic tags with Flexbox responsive layout.",
+        "addr": "📍 Address: XX Building, Tech Park, Nanshan, Shenzhen, China",
+        "phone": "📞 Phone: +86 400-123-4567",
+        "email": "📧 Email: contact@testsite.com",
+        "qrTip": "Follow Us!",
+        "copyright": "© 2026 Test Site · Semantic Tag Layout Demo"
+    }
+}
