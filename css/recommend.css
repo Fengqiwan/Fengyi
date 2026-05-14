@@ -25,13 +25,14 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
+    justify-content: center;
 }
 
 @media (min-width: 600px) {
-    .recommend-grid { grid-template-columns: repeat(2, 1fr); }
+    .recommend-grid { grid-template-columns: repeat(2, minmax(220px, 260px)); }
 }
 @media (min-width: 900px) {
-    .recommend-grid { grid-template-columns: repeat(4, 1fr); }
+    .recommend-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 }
 
 /* --- 卡片 --- */
