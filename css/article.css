@@ -1,0 +1,123 @@
+/* ==============================================
+   ARTICLE
+   ============================================== */
+
+article {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+article h2 { font-size: 30px; color: #1a1a2e; margin-bottom: 6px; }
+article > .meta { font-size: 13px; color: #999; margin-bottom: 14px; }
+article > p { line-height: 1.8; color: #555; margin-bottom: 12px; }
+
+/* --- SECTION --- */
+article section {
+    margin-top: 18px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+article section h3 { font-size: 16px; color: #2c3e50; margin-bottom: 10px; }
+article section p  { line-height: 1.8; color: #555; margin-bottom: 8px; }
+article section ul,
+article section ol { padding-left: 22px; margin-bottom: 8px; }
+article section li { line-height: 1.9; color: #555; margin-bottom: 3px; }
+
+@media (min-width: 768px) {
+    article { padding: 30px; }
+    article h2 { font-size: 24px; }
+    article section { padding: 20px; }
+    article section h3 { font-size: 18px; }
+}
+
+
+
+
+/* ---------- 语音播放条 ---------- */
+.article-audio {
+  display: block;
+  width: 100%;
+  /* max-width: 480px; */
+  margin: 16px 0 20px;
+  border-radius: var(--radius-base);
+  outline-color: var(--color-primary);
+}
+
+
+/* ---------- 文中图片 + 图注 ---------- */
+
+.article-figure {
+  margin: 24px 0;
+  padding: 0;
+}
+
+.article-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-base);
+  margin: 0 auto;
+}
+
+.article-figure figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* 竖版图片 */
+.article-figure img.portrait {
+  max-width: 50%;
+}
+@media (max-width: 767px) {
+  .article-figure img.portrait {
+    max-width: 70%;
+  }
+}
+.article-figure figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ---------- 响应式图片尺寸 ---------- */
+
+/* 平板及以上：图片最大宽度限制，居中 */
+@media (min-width: 768px) {
+  .article-figure {
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 桌面端：进一步收窄 */
+@media (min-width: 1024px) {
+  .article-figure {
+    max-width: 70%;
+  }
+}
+
+/* 小屏：图片撑满 */
+@media (max-width: 767px) {
+  .article-figure {
+    margin: 16px -12px;
+  }
+
+  .article-figure img {
+    border-radius: 0;
+  }
+
+  .article-figure figcaption {
+    padding: 0 12px;
+  }
+}

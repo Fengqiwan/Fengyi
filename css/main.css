@@ -1,0 +1,12 @@
+/* ==============================================
+   MAIN
+   ============================================== */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+@media (min-width: 768px) {
+    main { padding: 30px 40px; }
+}
+

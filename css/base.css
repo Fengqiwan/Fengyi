@@ -1,0 +1,16 @@
+/* ==============================================
+   全局
+   ============================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: "Microsoft YaHei", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color: #333;
+    background: #f0f2f5;
+    padding-top: 60px;
+    min-height: 100vh;
+}
+
+/* 锚点偏移：防止 fixed header 遮挡跳转目标 */
+[id] { scroll-margin-top: 80px; }
