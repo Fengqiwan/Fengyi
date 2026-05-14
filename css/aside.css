@@ -30,7 +30,7 @@
     overflow-y: auto;
     display: none;
 }
-.toc-panel.show {
+.toc-panel.open {
     display: block;
     animation: fadeSlideUp 0.25s ease;
 }

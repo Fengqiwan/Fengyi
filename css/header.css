@@ -63,7 +63,7 @@ header h1 {
     min-width: 150px;
     z-index: 1001;
 }
-.lang-popup.show {
+.lang-popup.open {
     display: block;
     animation: fadeDown 0.2s ease;
 }
