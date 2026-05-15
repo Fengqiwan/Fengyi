@@ -65,6 +65,16 @@ project/
       <h2 data-i18n="a1.title"></h2>
       <p class="meta" data-i18n="a1.meta"></p>
       <p data-i18n="a1.intro"></p>
+      <!-- 语音播放条 -->
+      <audio class="article-audio" controls preload="metadata" controls controlslist="nodownload">
+        <source src="../assets/audio/yangxianyi.mp3" type="audio/mpeg">
+      </audio>
+
+      <!-- 文中图片 + 图注 -->
+      <figure class="article-figure">
+          <img class="portrait" src="../assets/image图1：图1s/杨仙逸.webp" alt="语义化标签结构示意图" loading="lazy">
+          <figcaption data-i18n="a1.s1.fig1"></figcaption>
+      </figure>
 
       <section id="chap1-1">
         <h3 data-i18n="a1.s1.title"></h3>

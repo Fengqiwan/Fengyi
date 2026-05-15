@@ -1,0 +1,17 @@
+{
+  "a1": {
+     "title": "Guide to Using Semantic Tags", 
+     "intro": "...",
+     "s1":{
+        "title":"Subheading",
+        "li1": "List 1",
+        "li2": "List 2",
+        "fig1": "Yang Xianyi",
+        "fig2": "Sun Yat-sen and Song Qingling pose for a photo in front of Rosamonde"
+     } 
+  },
+  "recommend": {
+    "r1": { "tag": "CSS Layout", "title": "The Complete Guide to CSS Grid", "desc": "..." },
+    "r2": { "tag": "Accessibility",  "title": "Introduction to Web Accessibility Design", "desc": "..." }
+  }
+}
