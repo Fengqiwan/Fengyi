@@ -32,7 +32,7 @@
     .recommend-grid { grid-template-columns: repeat(2, minmax(220px, 260px)); }
 }
 @media (min-width: 900px) {
-    .recommend-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .recommend-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 260px)); }
 }
 
 /* --- 卡片 --- */
