@@ -3,6 +3,14 @@ export function initToc() {
   const nav = document.getElementById('tocNav');
   if (!nav) return;
 
+  // 不足2个article就隐藏整个目录
+  const articles = document.querySelectorAll('main > article');
+  if(articles.length < 2) {
+    document.getElementById('tocPanel')?.style.setProperty('display', 'none');
+    document.getElementById('tocToggle')?.style.setProperty('display', 'none');
+    return;
+  }
+
   const ul = document.createElement('ul');
   document.querySelectorAll('main > article').forEach(article => {
     const li = document.createElement('li');
