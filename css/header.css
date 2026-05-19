@@ -5,7 +5,7 @@ header {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
-    height: 60px;
+    min-height: 60px;
     background: #1a1a2e;
     color: #fff;
     display: flex;
@@ -29,7 +29,8 @@ header {
 header h1 {
     font-size: 18px;
     font-weight: 600;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    word-break: break-word; /*  防止超长单词（比如德语复合词）不断行溢出。 */
 }
 
 /* --- 语言切换 --- */
