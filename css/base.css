@@ -5,11 +5,14 @@
 html { scroll-behavior: smooth; }
 
 body {
-    font-family: "Microsoft YaHei", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-family: "Microsoft YaHei", "HarmonyOS Sans", "PingFang SC", "Noto Sans SC", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, -apple-system, sans-serif;
     color: #333;
     background: #f0f2f5;
     padding-top: 60px;
     min-height: 100vh;
+    /* 字体平滑更清晰 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* 锚点偏移：防止 fixed header 遮挡跳转目标 */
