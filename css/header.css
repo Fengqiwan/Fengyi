@@ -22,7 +22,7 @@ header {
 }
 
 .header-logo {
-    width: 70px; height: 50px;
+    min-width: 70px; height: 50px;
     object-fit: cover; border-radius: 6px; flex-shrink: 0;
 }
 
