@@ -19,6 +19,7 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 1;
 }
 
 .header-logo {
@@ -31,6 +32,7 @@ header h1 {
     font-weight: 600;
     /* white-space: nowrap; */
     word-break: break-word; /*  防止超长单词（比如德语复合词）不断行溢出。 */
+    flex: 1;
 }
 
 /* --- 语言切换 --- */
